@@ -4,59 +4,9 @@
                 xmlns:f="http://java.sun.com/jsf/core"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:a4j="http://richfaces.org/a4j"
-                xmlns:rich="http://richfaces.org/rich">
-    <h:head>
-        <title>Users</title>
-    </h:head>
-
-    <h:form id="form">
-
-
-        <rich:dataTable value="#{users.all}" var="user" id="table">
-            <rich:column>
-                <f:facet name="header">Username</f:facet>
-                <h:outputText value="#{user.username}"/>
-            </rich:column>
-            <rich:column>
-                <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
-                    <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
-                    <f:setPropertyActionListener target="#{users.current}" value="#{user}"/>
-                </a4j:commandLink>
-                <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid">
-                    <h:graphicImage value="/resources/images/edit.gif" alt="edit"/>
-                    <f:setPropertyActionListener target="#{users.current}" value="#{user}"/>
-                </a4j:commandLink>
-            </rich:column>
-        </rich:dataTable>
-
-
-        <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid">
-            <h:outputText value="Create user" />
-            <f:setPropertyActionListener target="#{users.current}" value="#{user.template}"/>
-        </a4j:commandLink>
-
-
-        <rich:popupPanel header="Remove user" id="removePopup" autosized="true">
-            Are you sure you want to remove the user?
-            <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
-            <a4j:commandButton value="Remove" action="#{users.removeCurrent}" oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
-        </rich:popupPanel>
-
-
-        <rich:popupPanel header="Edit user" id="editPopup" domElementAttachment="parent" width="400" height="170">
-            <h:panelGrid columns="3" id="editGrid">
-                <h:outputText value="Username" />
-                <h:inputText value="#{users.current.username}" required="true" requiredMessage="Username is required" id="username"
-                             converterMessage="Not a valid username" validatorMessage="Not a valid username" label="Username">
-                    <f:validateLength minimum="2" />
-                </h:inputText>
-                <h:panelGroup />
-                <rich:message id="vinMsg" for="vin" />
-            </h:panelGrid>
-            <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
-            <a4j:commandButton value="Save" action="#{users.saveCurrent}" oncomplete="#{rich:component('editPopup')}.hide();" render="table"/>
-        </rich:popupPanel>
-
-
-    </h:form>
+                xmlns:rich="http://richfaces.org/rich"
+                template="templates/template.xhtml">
+    <ui:define name="content">
+        (start page)
+    </ui:define>
 </ui:composition>
