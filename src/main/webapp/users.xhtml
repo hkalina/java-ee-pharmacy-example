@@ -15,6 +15,14 @@
                     <h:outputText value="#{user.username}"/>
                 </rich:column>
                 <rich:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{user.firstName} #{user.lastName}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Role</f:facet>
+                    <h:outputText value="#{user.role.label}"/>
+                </rich:column>
+                <rich:column>
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
                         <f:setPropertyActionListener target="#{users.current}" value="#{user}"/>
@@ -38,21 +46,44 @@
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
             </rich:popupPanel>
 
-            <rich:popupPanel header="Edit user" id="editPopup" domElementAttachment="parent" width="400" height="170">
+            <rich:popupPanel header="Edit user" id="editPopup" domElementAttachment="parent">
                 <h:panelGrid columns="3" id="editGrid">
-                    <h:outputText value="Username"/>
+
+                    <h:outputLabel value="Username"/>
                     <h:inputText value="#{users.current.username}" required="true"
                                  requiredMessage="Username is required" id="username"
                                  converterMessage="Not a valid username" validatorMessage="Not a valid username"
                                  label="Username">
                         <f:validateLength minimum="2"/>
                     </h:inputText>
-                    <h:panelGroup/>
-                    <rich:message id="vinMsg" for="vin"/>
+                    <rich:message for="username"/>
+
+                    <h:outputLabel value="Password"/>
+                    <h:inputSecret value="#{users.current.password}" id="password" />
+                    <rich:message for="password"/>
+
+                    <h:outputLabel value="First name"/>
+                    <h:inputText value="#{users.current.firstName}" id="firstName" />
+                    <rich:message for="firstName"/>
+
+                    <h:outputLabel value="Last name"/>
+                    <h:inputText value="#{users.current.lastName}" id="lastName" />
+                    <rich:message for="lastName"/>
+
+                    <h:outputLabel value="E-mail"/>
+                    <h:inputText value="#{users.current.email}" id="email" />
+                    <rich:message for="email"/>
+
+                    <h:outputLabel value="Role"/>
+                    <h:selectOneMenu value="#{users.current.role}" id="role">
+                        <f:selectItems value="#{users.userRoles}" var="r" itemValue="#{r}" itemLabel="#{r.label}" />
+                    </h:selectOneMenu>
+                    <rich:message for="role"/>
+
                 </h:panelGrid>
+                <a4j:commandButton value="Save" action="#{users.saveCurrent}" render="table"
+                                   oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
-                <a4j:commandButton value="Save" action="#{users.saveCurrent}"
-                                   oncomplete="#{rich:component('editPopup')}.hide();" render="table"/>
             </rich:popupPanel>
 
         </h:form>

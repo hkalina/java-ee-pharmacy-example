@@ -49,4 +49,8 @@ public class UserController {
         return user;
     }
 
+    public User.UserRole[] getUserRoles(){
+        return User.UserRole.values();
+    }
+
 }
