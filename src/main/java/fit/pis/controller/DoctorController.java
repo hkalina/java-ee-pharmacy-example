@@ -1,34 +1,34 @@
 package fit.pis.controller;
 
-import fit.pis.domain.entity.User;
-import fit.pis.domain.mediator.UserDao;
+import fit.pis.domain.entity.Doctor;
+import fit.pis.domain.mediator.DoctorDao;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.List;
 
-@ManagedBean(name = "users")
+@ManagedBean(name = "doctors")
 @ViewScoped
-public class UserController {
+public class DoctorController {
 
-    private User current;
+    private Doctor current;
 
     @EJB
-    private UserDao dao;
+    private DoctorDao dao;
 
-    public List<User> getAll() {
+    public List<Doctor> getAll() {
         return dao.findAll();
     }
 
-    public User getCurrent() {
+    public Doctor getCurrent() {
         if (current == null) {
             current = getTemplate();
         }
         return current;
     }
 
-    public void setCurrent(User current) {
+    public void setCurrent(Doctor current) {
         this.current = current;
     }
 
@@ -40,14 +40,8 @@ public class UserController {
         dao.save(current);
     }
 
-    public User getTemplate() {
-        User user = new User();
-        user.setUsername("new");
-        return user;
-    }
-
-    public User.UserRole[] getUserRoles(){
-        return User.UserRole.values();
+    public Doctor getTemplate() {
+        return new Doctor();
     }
 
 }

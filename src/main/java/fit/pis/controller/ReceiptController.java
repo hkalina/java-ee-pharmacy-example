@@ -1,34 +1,34 @@
 package fit.pis.controller;
 
-import fit.pis.domain.entity.User;
-import fit.pis.domain.mediator.UserDao;
+import fit.pis.domain.entity.Receipt;
+import fit.pis.domain.mediator.ReceiptDao;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.List;
 
-@ManagedBean(name = "users")
+@ManagedBean(name = "receipts")
 @ViewScoped
-public class UserController {
+public class ReceiptController {
 
-    private User current;
+    private Receipt current;
 
     @EJB
-    private UserDao dao;
+    private ReceiptDao dao;
 
-    public List<User> getAll() {
+    public List<Receipt> getAll() {
         return dao.findAll();
     }
 
-    public User getCurrent() {
+    public Receipt getCurrent() {
         if (current == null) {
             current = getTemplate();
         }
         return current;
     }
 
-    public void setCurrent(User current) {
+    public void setCurrent(Receipt current) {
         this.current = current;
     }
 
@@ -40,14 +40,8 @@ public class UserController {
         dao.save(current);
     }
 
-    public User getTemplate() {
-        User user = new User();
-        user.setUsername("new");
-        return user;
-    }
-
-    public User.UserRole[] getUserRoles(){
-        return User.UserRole.values();
+    public Receipt getTemplate() {
+        return new Receipt();
     }
 
 }
