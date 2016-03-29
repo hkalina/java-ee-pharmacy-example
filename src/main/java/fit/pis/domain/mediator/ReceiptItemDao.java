@@ -23,7 +23,7 @@ public class ReceiptItemDao {
     }
 
     public List<ReceiptItem> findAll() {
-        TypedQuery<ReceiptItem> query = em.createQuery("SELECT r FROM Receipt r", ReceiptItem.class);
+        TypedQuery<ReceiptItem> query = em.createQuery("SELECT ri FROM ReceiptItem ri", ReceiptItem.class);
         return query.getResultList();
     }
 

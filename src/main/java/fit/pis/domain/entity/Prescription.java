@@ -1,5 +1,6 @@
 package fit.pis.domain.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,7 +27,7 @@ public class Prescription {
 
     private Date date;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescription")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescription", cascade = CascadeType.ALL)
     private List<PrescriptionItem> items;
 
     public long getId() {

@@ -9,70 +9,59 @@
     <ui:define name="content">
         <h:form id="form">
 
-            <rich:dataTable value="#{prescriptions.all}" var="prescription" id="table">
+            <rich:dataTable value="#{receipts.all}" var="receipt" id="table">
                 <rich:column>
                     <f:facet name="header">Date</f:facet>
-                    <h:outputText value="#{prescription.date}">
+                    <h:outputText value="#{receipt.date}">
                         <f:convertDateTime locale="en_US" type="both" dateStyle="short" />
                     </h:outputText>
                 </rich:column>
                 <rich:column>
                     <f:facet name="header">Customer</f:facet>
-                    <h:outputText value="#{prescription.customer}"/>
-                </rich:column>
-                <rich:column>
-                    <f:facet name="header">Doctor</f:facet>
-                    <h:outputText value="#{prescription.doctor}"/>
+                    <h:outputText value="#{receipt.customer}"/>
                 </rich:column>
                 <rich:column>
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
-                        <f:setPropertyActionListener target="#{prescriptions.current}" value="#{prescription}"/>
+                        <f:setPropertyActionListener target="#{receipts.current}" value="#{receipt}"/>
                     </a4j:commandLink>
                     <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems">
                         <h:graphicImage value="/resources/images/edit.gif" alt="edit"/>
-                        <f:setPropertyActionListener target="#{prescriptions.current}" value="#{prescription}"/>
+                        <f:setPropertyActionListener target="#{receipts.current}" value="#{receipt}"/>
                     </a4j:commandLink>
                 </rich:column>
             </rich:dataTable>
 
-            <a4j:commandButton value="Create prescription" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems">
-                <f:setPropertyActionListener target="#{prescriptions.current}" value="#{prescriptions.template}"/>
+            <a4j:commandButton value="Create receipt" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems">
+                <f:setPropertyActionListener target="#{receipts.current}" value="#{receipts.template}"/>
             </a4j:commandButton>
 
-            <rich:popupPanel header="Remove prescription" id="removePopup" autosized="true">
-                Are you sure you want to remove the prescription?
+            <rich:popupPanel header="Remove receipt" id="removePopup" autosized="true">
+                Are you sure you want to remove the receipt?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
-                <a4j:commandButton value="Remove" action="#{prescriptions.removeCurrent}"
+                <a4j:commandButton value="Remove" action="#{receipts.removeCurrent}"
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
             </rich:popupPanel>
 
-            <rich:popupPanel header="Edit prescription" id="editPopup" domElementAttachment="parent" autosized="true">
+            <rich:popupPanel header="Edit receipt" id="editPopup" domElementAttachment="parent" autosized="true">
                 <h:panelGrid columns="3" id="editGrid">
 
                     <h:outputLabel value="Date"/>
-                    <h:inputText value="#{prescriptions.current.date}" id="date">
+                    <h:inputText value="#{receipts.current.date}" id="date">
                         <f:convertDateTime locale="en_US" type="both" dateStyle="short" />
                     </h:inputText>
                     <rich:message for="date"/>
 
                     <h:outputLabel value="Customer"/>
-                    <h:selectOneMenu value="#{prescriptions.current.customer}" id="customer">
+                    <h:selectOneMenu value="#{receipts.current.customer}" id="customer">
                         <f:selectItems value="#{customers.all}" var="c" itemValue="#{c}" itemLabel="#{c}" />
                         <f:converter binding="#{customers}" />
                     </h:selectOneMenu>
                     <rich:message for="customer"/>
 
-                    <h:outputLabel value="Doctor"/>
-                    <h:selectOneMenu value="#{prescriptions.current.doctor}" id="doctor">
-                        <f:selectItems value="#{doctors.all}" var="d" itemValue="#{d}" itemLabel="#{d.name}" />
-                        <f:converter binding="#{doctors}" />
-                    </h:selectOneMenu>
-                    <rich:message for="doctor"/>
-
                 </h:panelGrid>
 
-                <rich:dataTable value="#{prescriptions.current.items}" var="item" id="tableitems">
+                <rich:dataTable value="#{receipts.current.items}" var="item" id="tableitems">
                     <rich:column>
                         <f:facet name="header">Medicament</f:facet>
                         <h:outputText value="#{item.medicament}"/>
@@ -84,49 +73,49 @@
                     <rich:column>
                         <a4j:commandLink onclick="#{rich:component('removeItemPopup')}.show();">
                             <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
-                            <f:setPropertyActionListener target="#{prescriptions.currentItem}" value="#{item}"/>
+                            <f:setPropertyActionListener target="#{receipts.currentItem}" value="#{item}"/>
                         </a4j:commandLink>
                         <a4j:commandLink onclick="#{rich:component('editItemPopup')}.show();" render="editItemGrid">
                             <h:graphicImage value="/resources/images/edit.gif" alt="edit"/>
-                            <f:setPropertyActionListener target="#{prescriptions.currentItem}" value="#{item}"/>
+                            <f:setPropertyActionListener target="#{receipts.currentItem}" value="#{item}"/>
                         </a4j:commandLink>
                     </rich:column>
                 </rich:dataTable>
 
                 <a4j:commandButton value="Add item" onclick="#{rich:component('editItemPopup')}.show();" render="editItemGrid">
-                    <f:setPropertyActionListener target="#{prescriptions.currentItem}" value="#{prescriptions.itemTemplate}"/>
+                    <f:setPropertyActionListener target="#{receipts.currentItem}" value="#{receipts.itemTemplate}"/>
                 </a4j:commandButton>
 
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
-                <a4j:commandButton value="Save" action="#{prescriptions.saveCurrent}" render="table"
+                <a4j:commandButton value="Save" action="#{receipts.saveCurrent}" render="table"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
             </rich:popupPanel>
 
-            <rich:popupPanel header="Remove prescription item" id="removeItemPopup" autosized="true">
+            <rich:popupPanel header="Remove receipt item" id="removeItemPopup" autosized="true">
                 Are you sure you want to remove the item?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removeItemPopup')}.hide();"/>
-                <a4j:commandButton value="Remove" action="#{prescriptions.removeCurrentItem}"
+                <a4j:commandButton value="Remove" action="#{receipts.removeCurrentItem}"
                                    oncomplete="#{rich:component('removeItemPopup')}.hide();" render="editGrid, tableitems"/>
             </rich:popupPanel>
 
-            <rich:popupPanel header="Edit prescription item" id="editItemPopup" domElementAttachment="parent" autosized="true">
+            <rich:popupPanel header="Edit receipt item" id="editItemPopup" domElementAttachment="parent" autosized="true">
                 <h:panelGrid columns="3" id="editItemGrid">
 
                     <h:outputLabel value="Medicament"/>
-                    <h:selectOneMenu value="#{prescriptions.currentItem.medicament}" id="medicament">
+                    <h:selectOneMenu value="#{receipts.currentItem.medicament}" id="medicament">
                         <f:selectItems value="#{medicaments.all}" var="m" itemValue="#{m}" itemLabel="#{m}"/>
                         <f:converter binding="#{medicaments}"/>
                     </h:selectOneMenu>
                     <rich:message for="medicament"/>
 
                     <h:outputLabel value="Amount"/>
-                    <h:inputText value="#{prescriptions.currentItem.amount}" id="amount"/>
+                    <h:inputText value="#{receipts.currentItem.amount}" id="amount"/>
                     <rich:message for="amount"/>
 
                 </h:panelGrid>
 
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editItemPopup')}.hide();"/>
-                <a4j:commandButton value="Save" action="#{prescriptions.saveCurrentItem}" render="editGrid, tableitems"
+                <a4j:commandButton value="Save" action="#{receipts.saveCurrentItem}" render="editGrid, tableitems"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editItemPopup')}.hide();}"/>
             </rich:popupPanel>
 

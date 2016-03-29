@@ -1,5 +1,6 @@
 package fit.pis.domain.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,7 +24,7 @@ public class Receipt {
 
     private Date date;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "receipt")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "receipt", cascade = CascadeType.ALL)
     private List<ReceiptItem> items;
 
     public long getId() {
