@@ -7,6 +7,7 @@ import fit.pis.domain.mediator.PrescriptionDao;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -66,6 +67,7 @@ public class PrescriptionController {
 
     public Prescription getTemplate() {
         Prescription prescription = new Prescription();
+        prescription.setDate(new Date());
         prescription.setItems(new LinkedList<>());
         return prescription;
     }

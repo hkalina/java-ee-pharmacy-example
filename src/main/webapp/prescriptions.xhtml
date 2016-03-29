@@ -13,7 +13,7 @@
                 <rich:column>
                     <f:facet name="header">Date</f:facet>
                     <h:outputText value="#{prescription.date}">
-                        <f:convertDateTime locale="en_US" type="both" dateStyle="short" />
+                        <f:convertDateTime pattern="d.M.yyyy" />
                     </h:outputText>
                 </rich:column>
                 <rich:column>
@@ -51,9 +51,7 @@
                 <h:panelGrid columns="3" id="editGrid">
 
                     <h:outputLabel value="Date"/>
-                    <h:inputText value="#{prescriptions.current.date}" id="date">
-                        <f:convertDateTime locale="en_US" type="both" dateStyle="short" />
-                    </h:inputText>
+                    <rich:calendar id="date" value="#{prescriptions.current.date}" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
                     <rich:message for="date"/>
 
                     <h:outputLabel value="Customer"/>
@@ -120,7 +118,7 @@
                     <rich:message for="medicament"/>
 
                     <h:outputLabel value="Amount"/>
-                    <h:inputText value="#{prescriptions.currentItem.amount}" id="amount"/>
+                    <rich:inputNumberSpinner value="#{prescriptions.currentItem.amount}" minValue="1" id="amount"/>
                     <rich:message for="amount"/>
 
                 </h:panelGrid>

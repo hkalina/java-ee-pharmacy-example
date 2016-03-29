@@ -7,6 +7,7 @@ import fit.pis.domain.mediator.ReceiptDao;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -72,6 +73,7 @@ public class ReceiptController {
 
     public Receipt getTemplate() {
         Receipt receipt = new Receipt();
+        receipt.setDate(new Date());
         receipt.setItems(new LinkedList<>());
         return receipt;
     }
