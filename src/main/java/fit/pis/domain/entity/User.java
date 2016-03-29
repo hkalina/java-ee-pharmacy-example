@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/** Uživatel systému (lékarník/vedoucí/technický správce) */
 @Entity
 public class User {
 
