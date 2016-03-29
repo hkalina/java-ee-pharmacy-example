@@ -80,10 +80,10 @@ public class Doctor {
         return name;
     }
 
-    public boolean equals(Object d) {
-        if (d == null) return false;
-        if ( ! (d instanceof Doctor)) return false;
-        return this.id == ((Doctor) d).id;
+    public boolean equals(Object object) {
+        if (object == null) return false;
+        if ( ! (object instanceof Doctor)) return false;
+        return this.id == ((Doctor) object).id;
     }
 
 }

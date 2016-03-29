@@ -15,4 +15,18 @@ public class Medicament {
 
     // TODO Léčivo
 
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean equals(Object object) {
+        if (object == null) return false;
+        if ( ! (object instanceof Medicament)) return false;
+        return this.id == ((Medicament) object).id;
+    }
 }

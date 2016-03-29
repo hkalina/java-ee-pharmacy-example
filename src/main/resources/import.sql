@@ -22,3 +22,5 @@ INSERT INTO User (id, username, password, email, firstName, lastName, role) VALU
 INSERT INTO Doctor (id, name, town, street, number, postCode, phone) VALUES (1, 'Testovací doktor', 'Město', 'Ulice', '12/345', 60012, '+420 123 456 789');
 
 INSERT INTO Customer (id) VALUES (1);
+
+INSERT INTO Medicament (id) VALUES (1);
