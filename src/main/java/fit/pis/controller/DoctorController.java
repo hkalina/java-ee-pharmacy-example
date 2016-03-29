@@ -6,11 +6,14 @@ import fit.pis.domain.mediator.DoctorDao;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.convert.Converter;
 import java.util.List;
 
 @ManagedBean(name = "doctors")
 @ViewScoped
-public class DoctorController {
+public class DoctorController implements Converter {
 
     private Doctor current;
 
@@ -44,4 +47,14 @@ public class DoctorController {
         return new Doctor();
     }
 
+    @Override
+    public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
+        if (value == null) return null;
+        return dao.getById(Long.valueOf(value));
+    }
+
+    @Override
+    public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object doctor) {
+        return Long.toString(((Doctor) doctor).getId());
+    }
 }

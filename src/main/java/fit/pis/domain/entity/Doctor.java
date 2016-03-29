@@ -10,7 +10,7 @@ import javax.persistence.Id;
 public class Doctor {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     String name;
@@ -75,4 +75,15 @@ public class Doctor {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    public String toString() {
+        return name;
+    }
+
+    public boolean equals(Object d) {
+        if (d == null) return false;
+        if ( ! (d instanceof Doctor)) return false;
+        return this.id == ((Doctor) d).id;
+    }
+
 }

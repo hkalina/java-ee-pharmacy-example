@@ -4,6 +4,7 @@ import fit.pis.domain.entity.Doctor;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
@@ -25,6 +26,16 @@ public class DoctorDao {
     public List<Doctor> findAll() {
         TypedQuery<Doctor> query = em.createQuery("SELECT d FROM Doctor d", Doctor.class);
         return query.getResultList();
+    }
+
+    public Doctor getById(long id) {
+        try {
+            TypedQuery<Doctor> query = em.createQuery("SELECT d FROM Doctor d WHERE id = :id", Doctor.class);
+            query.setParameter("id", id);
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
 }

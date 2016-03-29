@@ -10,9 +10,24 @@ import javax.persistence.Id;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     // TODO
+
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public boolean equals(Object object) {
+        if (object == null) return false;
+        if ( ! (object instanceof Customer)) return false;
+        return this.id == ((Customer) object).id;
+    }
 
 }

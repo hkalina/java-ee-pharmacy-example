@@ -6,7 +6,7 @@
 
     <groupId>fit</groupId>
     <artifactId>pis</artifactId>
-    <name>RichFaces 4 Application</name>
+    <name>PIS project</name>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 

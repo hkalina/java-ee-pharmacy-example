@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /** Předpis */
@@ -15,7 +15,7 @@ import java.util.List;
 public class Prescription {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne
@@ -24,7 +24,7 @@ public class Prescription {
     @ManyToOne
     private Doctor doctor;
 
-    private Timestamp time;
+    private Date date;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescription")
     private List<PrescriptionItem> items;
@@ -53,12 +53,12 @@ public class Prescription {
         this.doctor = doctor;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public List<PrescriptionItem> getItems() {

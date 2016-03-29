@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 /** Účtenka (!nikoliv recept!) */
@@ -15,13 +15,13 @@ import java.util.List;
 public class Receipt {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
     @ManyToOne
     private Customer customer;
 
-    private Timestamp time;
+    private Date date;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "receipt")
     private List<ReceiptItem> items;
@@ -42,12 +42,12 @@ public class Receipt {
         this.customer = customer;
     }
 
-    public Timestamp getTime() {
-        return time;
+    public Date getDate() {
+        return date;
     }
 
-    public void setTime(Timestamp time) {
-        this.time = time;
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public List<ReceiptItem> getItems() {
