@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+<title>Pharmacy Information System</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<!-- Twitter bootstrap http://getbootstrap.com/ -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/pis/resources/signin.css"/>
+</h:head>
+<h:body>
+
+<div class="container">
+
+    <form action="j_security_check" method="post" class="form-signin">
+        <h2 class="form-signin-heading">Pharmacy Information System</h2>
+        <label for="inputEmail" class="sr-only">Username</label>
+        <input type="text" id="inputEmail" class="form-control" placeholder="Username" name="j_username" required="required" autofocus="autofocus"/>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="j_password" required="required"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+
+        <p class="demo-creds">
+            <b>Demo credentials:</b><br/>
+            admin : admin<br/>
+            manager : manager<br/>
+            pharmacist : pharmacist
+        </p>
+    </form>
+
+</div>
+
+</h:body>
+</html>

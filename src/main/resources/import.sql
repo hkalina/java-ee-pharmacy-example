@@ -17,7 +17,7 @@
 
 -- You can use this file to load seed data into the database using SQL statements
 
-INSERT INTO User (id, username, password, email, firstName, lastName, role) VALUES (1, 'admin', 'admin', 'admin@test.cz', 'Správce', 'Správcovič', 2);
+INSERT INTO User (id, username, password, email, firstName, lastName, role) VALUES (1, 'admin', 'ISMvKXpXpadDiUoOSoAfww==', 'admin@test.cz', 'Správce', 'Správcovič', 'ADMIN');
 
 INSERT INTO Doctor (id, name, town, street, number, postCode, phone) VALUES (1, 'Testovací doktor', 'Město', 'Ulice', '12/345', 60012, '+420 123 456 789');
 

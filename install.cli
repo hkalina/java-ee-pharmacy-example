@@ -1,0 +1,4 @@
+
+/subsystem=security/security-domain=pis-domain/:add(cache-type="default")
+/subsystem=security/security-domain=pis-domain/authentication=classic:add(login-modules=[{"code"=>"Database", "flag"=>"required", "module-options"=>["dsJndiName"=>"java:jboss/datasources/ExampleDS", "principalsQuery"=>"SELECT password FROM User WHERE username = ?", "rolesQuery"=>"SELECT role, 'Roles' FROM User WHERE username = ?", hashAlgorithm=MD5, hashEncoding=base64]}])
+/:reload

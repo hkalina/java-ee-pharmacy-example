@@ -1,9 +1,15 @@
 package fit.pis.domain.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 
 /** Uživatel systému (lékarník/vedoucí/technický správce) */
 @Entity
@@ -17,6 +23,8 @@ public class User {
     private String firstName;
     private String lastName;
     private String email;
+
+    @Enumerated(EnumType.STRING)
     private UserRole role;
 
     public long getId() {
@@ -39,8 +47,8 @@ public class User {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPassword(String password) throws NoSuchAlgorithmException {
+        this.password = hash(password);
     }
 
     public String getFirstName() {
@@ -73,6 +81,13 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    private String hash(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        byte[] hashBytes = md.digest(password.getBytes(StandardCharsets.UTF_8));
+        String hash = Base64.getEncoder().encodeToString(hashBytes);
+        return hash;
     }
 
     public enum UserRole {
