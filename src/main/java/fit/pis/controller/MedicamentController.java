@@ -1,6 +1,5 @@
 package fit.pis.controller;
 
-import fit.pis.domain.entity.Doctor;
 import fit.pis.domain.entity.Medicament;
 import fit.pis.domain.mediator.MedicamentDao;
 
@@ -10,6 +9,8 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
+
+import java.util.Date;
 import java.util.List;
 
 @ManagedBean(name = "medicaments")
@@ -45,6 +46,9 @@ public class MedicamentController implements Converter {
     }
 
     public Medicament getTemplate() {
+    	Medicament medicament = new Medicament();
+    	medicament.setValidFrom(new Date());
+    	medicament.setValidTo(new Date());
         return new Medicament();
     }
 
