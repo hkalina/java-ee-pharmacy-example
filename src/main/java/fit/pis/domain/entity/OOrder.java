@@ -1,5 +1,6 @@
 package fit.pis.domain.entity;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -17,6 +18,8 @@ public class OOrder {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private long id;
+  
+  private Date date;
   
   @ManyToOne
   private Supplier supplier;
@@ -47,4 +50,12 @@ public class OOrder {
   public void setOrderItems(List<OOrderItem> oorderItems) {
     this.oorderItems = oorderItems;
   }
+
+public Date getDate() {
+	return date;
+}
+
+public void setDate(Date date) {
+	this.date = date;
+}
 }

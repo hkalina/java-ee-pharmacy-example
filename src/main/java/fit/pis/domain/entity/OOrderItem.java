@@ -19,7 +19,7 @@ public class OOrderItem {
   private OOrder oorder;
   
   @ManyToOne
-  private Medicament drug;
+  private Medicament medicament;
   
   public long getId() {
     return id;
@@ -46,10 +46,10 @@ public class OOrderItem {
   }
 
   public Medicament getMedicament() {
-    return drug;
+    return medicament;
   }
 
-  public void setMedicament(Medicament drug) {
-    this.drug = drug;
+  public void setMedicament(Medicament medicament) {
+    this.medicament = medicament;
   }
 }

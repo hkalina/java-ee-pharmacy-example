@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="templates/template.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+        	<rich:dataTable value="#{medicaments.all}" var="medicament" id="table">
+                <rich:column>
+                    <f:facet name="header">Title</f:facet>
+                    <h:outputText value="#{medicament.title}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Category</f:facet>
+                    <h:outputText value="#{medicament.category}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Prescrition</f:facet>
+                    <h:outputText value="#{medicament.prescription}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Delivery price</f:facet>
+                    <h:outputText value="#{medicament.deliveryPrice}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Margin</f:facet>
+                    <h:outputText value="#{medicament.margin}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Valid from</f:facet>
+                    <h:outputText value="#{medicament.validFrom}">
+                    	<f:convertDateTime pattern="d.M.yyyy" />
+                    </h:outputText>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Valid to</f:facet>
+                    <h:outputText value="#{medicament.validTo}">
+                    	<f:convertDateTime pattern="d.M.yyyy" />
+                    </h:outputText>
+                </rich:column>
+                <rich:column>
+                    <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
+                        <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
+                        <f:setPropertyActionListener target="#{medicaments.current}" value="#{medicament}"/>
+                    </a4j:commandLink>
+                    <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid">
+                        <h:graphicImage value="/resources/images/edit.gif" alt="edit"/>
+                        <f:setPropertyActionListener target="#{medicaments.current}" value="#{medicament}"/>
+                    </a4j:commandLink>
+                </rich:column>
+            </rich:dataTable>
+            
+            <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid">
+                <h:outputText value="Create medicament"/>
+                <f:setPropertyActionListener target="#{medicaments.current}" value="#{medicament.template}"/>
+            </a4j:commandLink>
+            
+            <rich:popupPanel header="Remove medicament" id="removePopup" autosized="true">
+                Are you sure you want to remove the medicament?
+                <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
+                <a4j:commandButton value="Remove" action="#{medicaments.removeCurrent}"
+                                   oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
+            </rich:popupPanel>
+            
+            <rich:popupPanel header="Edit medicament" id="editPopup" domElementAttachment="parent">
+                <h:panelGrid columns="3" id="editGrid">
+
+                    <h:outputLabel value="Title"/>
+                    <h:inputText value="#{medicaments.current.title}" id="title" />
+                    <rich:message for="title"/>
+                    
+                    <h:outputLabel value="Category"/>
+                    <h:selectOneMenu value="#{medicaments.current.category}" id="category">
+                        <f:selectItems value="#{categories.all}" var="c" itemValue="#{c}" itemLabel="#{c}" />
+                        <f:converter binding="#{categories}" />
+                    </h:selectOneMenu>
+                    <rich:message for="category"/>
+
+                    <h:outputLabel value="Prescription"/>
+                    <h:selectBooleanCheckbox value="#{medicaments.current.prescription}" id="prescription" />
+                    <rich:message for="prescription"/>
+
+                    <h:outputLabel value="Delivery price"/>
+                    <rich:inputNumberSpinner value="#{medicaments.current.deliveryPrice}" minValue="1" id="deliveryPrice" />
+                    <rich:message for="deliveryPrice"/>
+
+                    <h:outputLabel value="Margin"/>
+                    <rich:inputNumberSpinner value="#{medicaments.current.margin}" minValue="1" id="margin" />
+                    <rich:message for="margin"/>
+
+                    <h:outputLabel value="validFrom"/>
+                    <rich:calendar value="#{medicaments.current.validFrom}" id="validFrom" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
+                    <rich:message for="validFrom"/>
+
+                    <h:outputLabel value="validTo"/>
+                    <rich:calendar value="#{medicaments.current.validTo}" id="validTo" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
+                    <rich:message for="validTo"/>
+
+                </h:panelGrid>
+                <a4j:commandButton value="Save" action="#{medicaments.saveCurrent}" render="table"
+                                   oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
+                <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
+            </rich:popupPanel>
+        </h:form>
+    </ui:define>
+</ui:composition>
