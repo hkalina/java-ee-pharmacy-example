@@ -19,6 +19,10 @@
                     <h:outputText value="#{user.firstName} #{user.lastName}"/>
                 </rich:column>
                 <rich:column>
+                    <f:facet name="header">Email</f:facet>
+                    <h:outputText value="#{user.email}"/>
+                </rich:column>
+                <rich:column>
                     <f:facet name="header">Role</f:facet>
                     <h:outputText value="#{user.role.label}"/>
                 </rich:column>
@@ -49,11 +53,10 @@
             <rich:popupPanel header="Edit user" id="editPopup" domElementAttachment="parent">
                 <h:panelGrid columns="3" id="editGrid">
 
-                    <h:outputLabel value="Username"/>
-                    <h:inputText value="#{users.current.username}" required="true"
-                                 requiredMessage="Username is required" id="username"
-                                 converterMessage="Not a valid username" validatorMessage="Not a valid username"
-                                 label="Username">
+                    <h:outputLabel value="Username" styleClass="required"/>
+                    <h:inputText value="#{users.current.username}" required="true" id="username"
+                                 requiredMessage="Username is required"
+                                 validatorMessage="Minimum length of username is 2">
                         <f:validateLength minimum="2"/>
                     </h:inputText>
                     <rich:message for="username"/>
@@ -71,10 +74,12 @@
                     <rich:message for="lastName"/>
 
                     <h:outputLabel value="E-mail"/>
-                    <h:inputText value="#{users.current.email}" id="email" />
+                    <h:inputText value="#{users.current.email}" id="email" validatorMessage="Email is not valid">
+                        <f:validateRegex pattern="^$|^[_A-Za-z0-9-\+]+@[A-Za-z0-9-]+\.[A-Za-z]{2,}$" />
+                    </h:inputText>
                     <rich:message for="email"/>
 
-                    <h:outputLabel value="Role"/>
+                    <h:outputLabel value="Role" styleClass="required"/>
                     <h:selectOneMenu value="#{users.current.role}" id="role">
                         <f:selectItems value="#{users.userRoles}" var="r" itemValue="#{r}" itemLabel="#{r.label}" />
                     </h:selectOneMenu>

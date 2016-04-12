@@ -53,7 +53,7 @@
             <rich:popupPanel header="Edit doctor" id="editPopup" domElementAttachment="parent">
                 <h:panelGrid columns="3" id="editGrid">
 
-                    <h:outputLabel value="Name"/>
+                    <h:outputLabel value="Name" styleClass="required"/>
                     <h:inputText value="#{doctors.current.name}" id="name" />
                     <rich:message for="name"/>
 

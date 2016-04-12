@@ -1,0 +1,16 @@
+
+.required {
+  color: red;
+}
+.required:after {
+  content: "*";
+}
+
+.rf-msg {
+  line-height: 1 !important;
+}
+
+.logout {
+  color: white;
+  margin: 10px;
+}

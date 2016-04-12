@@ -12,6 +12,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="/pis/resources/dashboard.css"/>
+    <link rel="stylesheet" href="/pis/resources/forms.css"/>
 </h:head>
 <h:body>
     <div class="navbar navbar-inverse navbar-fixed-top">
@@ -27,7 +28,12 @@
             </div>
             <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#{request.contextPath}/">Log out</a></li>
+                    <li class="logout">
+                        <h:form>
+                            <h:outputText value="#{login.username} [#{login.role.label}]"/>
+                            <h:commandLink value="Log Out" action="#{login.logout}"/>
+                        </h:form>
+                    </li>
                 </ul>
             </div>
         </div>
