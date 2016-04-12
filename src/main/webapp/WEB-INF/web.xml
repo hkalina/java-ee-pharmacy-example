@@ -57,7 +57,12 @@
         <servlet-name>Resource Servlet</servlet-name>
         <url-pattern>/org.richfaces.resources/*</url-pattern>
     </servlet-mapping>
-
+    <!--
+    <filter-mapping>
+        <filter-name>PicketBox Delegating Filter</filter-name>
+        <url-pattern>/logout</url-pattern>
+    </filter-mapping>
+    -->
     <!-- Resource Mapping - resources will be served compressed and packed in production -->
     <context-param>
         <param-name>org.richfaces.resourceMapping.enabled</param-name>
@@ -84,7 +89,6 @@
         <welcome-file>faces/index.xhtml</welcome-file>
     </welcome-file-list>
 
-    <!--
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>Protected Area</web-resource-name>
@@ -96,7 +100,6 @@
             <role-name>ADMIN</role-name>
         </auth-constraint>
     </security-constraint>
-    -->
 
     <login-config>
         <!--
