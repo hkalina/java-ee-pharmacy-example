@@ -25,4 +25,4 @@ INSERT INTO Doctor (id, name, town, street, number, postCode, phone) VALUES (1, 
 
 INSERT INTO Customer (id) VALUES (1);
 
-INSERT INTO Medicament (id) VALUES (1);
+-- INSERT INTO Medicament (id) VALUES (1);

@@ -74,7 +74,7 @@
                     
                     <h:outputLabel value="Category"/>
                     <h:selectOneMenu value="#{medicaments.current.category}" id="category">
-                        <f:selectItems value="#{categories.all}" var="c" itemValue="#{c}" itemLabel="#{c}" />
+                        <f:selectItems value="#{categories.all}" var="c" itemValue="#{c}" itemLabel="#{c.title}" />
                         <f:converter binding="#{categories}" />
                     </h:selectOneMenu>
                     <rich:message for="category"/>
@@ -90,14 +90,6 @@
                     <h:outputLabel value="Margin"/>
                     <rich:inputNumberSpinner value="#{medicaments.current.margin}" minValue="1" id="margin" />
                     <rich:message for="margin"/>
-
-                    <h:outputLabel value="validFrom"/>
-                    <rich:calendar value="#{medicaments.current.validFrom}" id="validFrom" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
-                    <rich:message for="validFrom"/>
-
-                    <h:outputLabel value="validTo"/>
-                    <rich:calendar value="#{medicaments.current.validTo}" id="validTo" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
-                    <rich:message for="validTo"/>
 
                 </h:panelGrid>
                 <a4j:commandButton value="Save" action="#{medicaments.saveCurrent}" render="table"

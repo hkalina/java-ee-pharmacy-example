@@ -38,18 +38,36 @@ public class MedicamentController implements Converter {
     }
 
     public void removeCurrent() {
-        dao.remove(current);
+    	current.setValidTo(new Date());
+		dao.save(current);
+		current = null;
     }
 
     public void saveCurrent() {
-        dao.save(current);
+    	System.out.println("save medicament...");
+    	if(current.getId() != 0) {
+    		Medicament old = dao.getById(current.getId());
+    		old.setValidTo(new Date());
+    		dao.save(old);
+    		Medicament newCurrent = this.getTemplate();
+    		newCurrent.setTitle(current.getTitle());
+    		newCurrent.setCategory(current.getCategory());
+    		newCurrent.setDeliveryPrice(current.getDeliveryPrice());
+    		newCurrent.setMargin(current.getMargin());
+    		newCurrent.setPrescription(current.getPrescription());
+    		current = newCurrent;
+    		dao.save(newCurrent);
+    	}
+    	else {
+    		dao.save(current);
+    	}
     }
 
     public Medicament getTemplate() {
     	Medicament medicament = new Medicament();
     	medicament.setValidFrom(new Date());
-    	medicament.setValidTo(new Date());
-        return new Medicament();
+    	medicament.setPrescription(false);
+        return medicament;
     }
 
     @Override

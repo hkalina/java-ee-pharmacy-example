@@ -1,5 +1,6 @@
 package fit.pis.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -37,15 +38,31 @@ public class CategoryController implements Converter {
 	
 	public void saveCurrent() {
 		System.out.println("save category...");
-		dao.save(current);
+		if(current.getId() != 0) {
+			Category old = dao.getById(current.getId());
+			old.setValidTo(new Date());
+			dao.save(old);
+			Category newCurrent = this.getTemplate();
+			newCurrent.setTitle(current.getTitle());
+			newCurrent.setPaidPrice(current.getPaidPrice());
+			current = newCurrent;
+			dao.save(newCurrent);
+		}
+		else {
+			dao.save(current);
+		}
 	}
 	
 	public void removeCurrent() {
-		dao.remove(current);
+		current.setValidTo(new Date());
+		dao.save(current);
+		current = null;
 	}
 	
 	public Category getTemplate() {
-		return new Category();
+		Category category = new Category();
+		category.setValidFrom(new Date());
+		return category;
 	}
 
 	@Override

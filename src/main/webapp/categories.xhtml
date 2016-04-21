@@ -50,7 +50,7 @@
             <rich:popupPanel header="Remove category" id="removePopup" autosized="true">
                 Are you sure you want to remove the category?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
-                <a4j:commandButton value="Remove" action="#{doctors.removeCurrent}"
+                <a4j:commandButton value="Remove" action="#{categories.removeCurrent}"
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
             </rich:popupPanel>
         	
@@ -58,20 +58,12 @@
                 <h:panelGrid columns="3" id="editGrid">
                 	
                 	<h:outputLabel value="Title"/>
-                    <h:inputText value="#{category.current.title}" id="title" />
+                    <h:inputText value="#{categories.current.title}" id="title" />
                     <rich:message for="title"/>
                     
                     <h:outputLabel value="Paid price"/>
                     <rich:inputNumberSpinner value="#{categories.current.paidPrice}" minValue="1" id="paidPrice" />
                     <rich:message for="paidPrice"/>
-                    
-                    <h:outputLabel value="validFrom"/>
-                    <rich:calendar value="#{categories.current.validFrom}" id="validFrom" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
-                    <rich:message for="validFrom"/>
-
-                    <h:outputLabel value="validTo"/>
-                    <rich:calendar value="#{categories.current.validTo}" id="validTo" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
-                    <rich:message for="validTo"/>
                 	
         		</h:panelGrid>
                 <a4j:commandButton value="Save" action="#{categories.saveCurrent}" render="table"
