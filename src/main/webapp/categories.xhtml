@@ -19,6 +19,10 @@
                     <h:outputText value="#{category.paidPrice}%"/>
                 </rich:column>
                 <rich:column>
+                    <f:facet name="header">Insurance</f:facet>
+                    <h:outputText value="#{category.insurance.name}"/>
+                </rich:column>
+                <rich:column>
                     <f:facet name="header">Valid from</f:facet>
                     <h:outputText value="#{category.validFrom}">
                     	<f:convertDateTime pattern="d.M.yyyy" />
@@ -64,6 +68,13 @@
                     <h:outputLabel value="Paid price"/>
                     <rich:inputNumberSpinner value="#{categories.current.paidPrice}" minValue="1"  maxValue="100" id="paidPrice" />%
                     <rich:message for="paidPrice"/>
+                    
+                    <h:outputLabel value="Insurance"/>
+                    <h:selectOneMenu value="#{categories.current.insurance}" id="insurance">
+                        <f:selectItems value="#{insurances.all}" var="c" itemValue="#{c}" itemLabel="#{c.name}" />
+                        <f:converter binding="#{insurances}" />
+                    </h:selectOneMenu>
+                    <rich:message for="insurance"/>
                 	
         		</h:panelGrid>
                 <a4j:commandButton value="Save" action="#{categories.saveCurrent}" render="table"

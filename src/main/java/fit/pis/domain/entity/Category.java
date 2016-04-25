@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -24,6 +25,9 @@ public class Category {
   private Date validFrom;
   
   private Date validTo;
+  
+  @ManyToOne
+  private Insurance insurance;
   
   @OneToMany(fetch = FetchType.EAGER, mappedBy = "category", cascade = CascadeType.ALL)
   private List<Medicament> medicaments;
@@ -68,11 +72,11 @@ public class Category {
     this.validTo = validTo;
   }
 
-  public List<Medicament> getDrugs() {
+  public List<Medicament> getMedicaments() {
     return medicaments;
   }
 
-  public void setDrugs(List<Medicament> medicaments) {
+  public void setMedicaments(List<Medicament> medicaments) {
     this.medicaments = medicaments;
   }
 
@@ -86,4 +90,11 @@ public class Category {
     return ((Category)object).getId() == this.getId();
   }
 
+  public Insurance getInsurance() {
+	return insurance;
+  }
+
+  public void setInsurance(Insurance insurance) {
+	this.insurance = insurance;
+  }
 }

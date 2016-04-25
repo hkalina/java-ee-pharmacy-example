@@ -29,4 +29,6 @@ INSERT INTO Category (id, paidPrice, title, validFrom, validTo) VALUES (-2, 100,
 
 INSERT INTO Medicament (id, category_id, deliveryPrice, margin, prescription, title, validFrom, validTo) VALUES (-1, -1, 123.50, 25.60, FALSE, 'Paralen', NOW(), NULL);
 
-INSERT INTO Customer (id) VALUES (1);
+INSERT INTO Insurance (id, insuranceNumber, name, citty, street, houseNumber, postcode, phoneNumber) VALUES (-1, 300, 'VZP', 'Praha', 'Jižní', 456, 12345, 789456123);
+
+INSERT INTO Customer (id, name, citty, street, houseNumber, postcode, phoneNumber, email, insurance_id) VALUES (-1, 'Karel Arazim', 'Brno', 'Četnická', 45, 45612, 789456123, 'karel@gmail.com', -1);

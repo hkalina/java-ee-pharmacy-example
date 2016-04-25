@@ -185,7 +185,15 @@
         <!-- Maven will append the version to the finalName (which is the
             name given to the generated WAR, and hence the context root) -->
         <finalName>${project.artifactId}</finalName>
-        <plugins>
+        <plugins> <!--
+        	<plugin>
+        		<artifactId>maven-compiler-plugin</artifactId>
+        		<version>3.1</version>
+        		<configuration>
+        			<fork>true</fork>
+        			<executable>C:\Program Files\Java\jdk1.8.0_65\bin\javac.exe</executable>
+        		</configuration>
+        	</plugin>  -->
             <plugin>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>${version.war.plugin}</version>

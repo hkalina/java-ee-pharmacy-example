@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:a4j="http://richfaces.org/a4j"
+                xmlns:rich="http://richfaces.org/rich"
+                template="templates/template.xhtml">
+    <ui:define name="content">
+        <h:form id="form">
+        
+        	<rich:dataTable value="#{insurances.all}" var="insurance" id="table">
+        		<rich:column>
+                    <f:facet name="header">Insurance number</f:facet>
+                    <h:outputText value="#{insurance.insuranceNumber}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Name</f:facet>
+                    <h:outputText value="#{insurance.name}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Address</f:facet>
+                    <h:outputText value="#{insurance.street} #{insurance.houseNumber}, #{insurance.citty}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Post code</f:facet>
+                    <h:outputText value="#{insurance.postcode}"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Phone</f:facet>
+                    <h:outputText value="#{insurance.phoneNumber}"/>
+                </rich:column>
+        		<rich:column>
+                    <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
+                        <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
+                        <f:setPropertyActionListener target="#{insurances.current}" value="#{insurance}"/>
+                    </a4j:commandLink>
+                    <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid">
+                        <h:graphicImage value="/resources/images/edit.gif" alt="edit"/>
+                        <f:setPropertyActionListener target="#{insurances.current}" value="#{insurance}"/>
+                    </a4j:commandLink>
+                </rich:column>
+        	</rich:dataTable>
+        	
+        	<a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid">
+                <h:outputText value="Create insurance"/>
+                <f:setPropertyActionListener target="#{insurances.current}" value="#{insurance.template}"/>
+            </a4j:commandLink>
+
+            <rich:popupPanel header="Remove insurance" id="removePopup" autosized="true">
+                Are you sure you want to remove the insurance?
+                <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
+                <a4j:commandButton value="Remove" action="#{insurances.removeCurrent}"
+                                   oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
+            </rich:popupPanel>
+        
+        	<rich:popupPanel header="Edit insurance" id="editPopup" domElementAttachment="parent">
+                <h:panelGrid columns="3" id="editGrid">
+					
+                    <h:outputLabel value="Insurance number"/>
+                    <h:inputText value="#{insurances.current.insuranceNumber}" id="insuranceNumber" />
+                    <rich:message for="insuranceNumber"/>
+                    
+                    <h:outputLabel value="Name"/>
+                    <h:inputText value="#{insurances.current.name}" id="name" />
+                    <rich:message for="name"/>
+
+                    <h:outputLabel value="Town"/>
+                    <h:inputText value="#{insurances.current.citty}" id="citty" />
+                    <rich:message for="citty"/>
+
+                    <h:outputLabel value="Street"/>
+                    <h:inputText value="#{insurances.current.street}" id="street" />
+                    <rich:message for="street"/>
+
+                    <h:outputLabel value="Number"/>
+                    <h:inputText value="#{insurances.current.houseNumber}" id="number" />
+                    <rich:message for="number"/>
+
+                    <h:outputLabel value="Post code"/>
+                    <h:inputText value="#{insurances.current.postcode}" id="postCode" />
+                    <rich:message for="postCode"/>
+
+                    <h:outputLabel value="Phone"/>
+                    <h:inputText value="#{insurances.current.phoneNumber}" id="phone" />
+                    <rich:message for="phone"/>
+
+                </h:panelGrid>
+                <a4j:commandButton value="Save" action="#{insurances.saveCurrent}" render="table"
+                                   oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
+                <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
+            </rich:popupPanel>
+            
+        </h:form>
+    </ui:define>
+</ui:composition>
