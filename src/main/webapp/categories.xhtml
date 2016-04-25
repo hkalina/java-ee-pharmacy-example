@@ -16,7 +16,7 @@
                 </rich:column>
                 <rich:column>
                     <f:facet name="header">Paid price</f:facet>
-                    <h:outputText value="#{category.paidPrice}"/>
+                    <h:outputText value="#{category.paidPrice}%"/>
                 </rich:column>
                 <rich:column>
                     <f:facet name="header">Valid from</f:facet>
@@ -62,7 +62,7 @@
                     <rich:message for="title"/>
                     
                     <h:outputLabel value="Paid price"/>
-                    <rich:inputNumberSpinner value="#{categories.current.paidPrice}" minValue="1" id="paidPrice" />
+                    <rich:inputNumberSpinner value="#{categories.current.paidPrice}" minValue="1"  maxValue="100" id="paidPrice" />%
                     <rich:message for="paidPrice"/>
                 	
         		</h:panelGrid>

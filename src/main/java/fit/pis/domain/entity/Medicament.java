@@ -46,6 +46,10 @@ public class Medicament {
         return this.id == ((Medicament) object).id;
     }
 
+	public String toString() {
+		return title;
+	}
+
 	public String getTitle() {
 		return title;
 	}

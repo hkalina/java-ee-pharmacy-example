@@ -2,6 +2,7 @@ package fit.pis.domain.mediator;
 
 import fit.pis.domain.entity.User;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -9,6 +10,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 @Stateless
+@RolesAllowed({"ADMIN"})
 public class UserDao {
 
     @PersistenceContext

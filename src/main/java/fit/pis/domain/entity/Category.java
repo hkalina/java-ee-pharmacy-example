@@ -75,5 +75,15 @@ public class Category {
   public void setDrugs(List<Medicament> medicaments) {
     this.medicaments = medicaments;
   }
-  
+
+  public String toString() {
+    return title;
+  }
+
+  public boolean equals(Object object) {
+    if (object == null) return false;
+    if (!(object instanceof Category)) return false;
+    return ((Category)object).getId() == this.getId();
+  }
+
 }
