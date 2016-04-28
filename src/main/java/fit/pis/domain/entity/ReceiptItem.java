@@ -66,4 +66,7 @@ public class ReceiptItem {
         this.prescriptionItem = prescriptionItem;
     }
 
+    public float getPrice() {
+    	return ((float) this.amount * ((this.medicament.getDeliveryPrice() + this.medicament.getMargin()) * this.getMedicament().getCategory().getPaidPrice() / 100));
+    }
 }

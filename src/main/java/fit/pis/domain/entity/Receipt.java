@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /** Účtenka (!nikoliv recept!) */
@@ -59,4 +60,12 @@ public class Receipt {
         this.items = items;
     }
 
+    public float getPrice() {
+    	float totalPrice = (float) 0.0;
+    	for(Iterator<ReceiptItem> i = this.items.iterator(); i.hasNext(); ) {
+    		ReceiptItem item = i.next();
+    		totalPrice += item.getPrice();
+    	}
+    	return totalPrice;
+    }
 }

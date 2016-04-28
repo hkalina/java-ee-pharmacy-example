@@ -88,4 +88,10 @@ public class Insurance {
 	public void setPhoneNumber(int phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+
+    public boolean equals(Object object) {
+        if (object == null) return false;
+        if ( ! (object instanceof Insurance)) return false;
+        return this.id == ((Insurance) object).id;
+    }
 }

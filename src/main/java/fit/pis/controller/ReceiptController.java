@@ -1,5 +1,7 @@
 package fit.pis.controller;
 
+import fit.pis.domain.entity.Prescription;
+import fit.pis.domain.entity.PrescriptionItem;
 import fit.pis.domain.entity.Receipt;
 import fit.pis.domain.entity.ReceiptItem;
 import fit.pis.domain.mediator.ReceiptDao;
@@ -8,6 +10,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -75,6 +78,25 @@ public class ReceiptController {
         Receipt receipt = new Receipt();
         receipt.setDate(new Date());
         receipt.setItems(new LinkedList<>());
+        return receipt;
+    }
+    
+    public Receipt getFromPrescription(Prescription prescription) {
+        Receipt receipt = new Receipt();
+        receipt.setDate(prescription.getDate());
+        receipt.setCustomer(prescription.getCustomer());
+        receipt.setItems(new LinkedList<>());
+        
+        for(Iterator<PrescriptionItem> i = prescription.getItems().iterator(); i.hasNext(); ) {
+        	PrescriptionItem item = i.next();
+        	ReceiptItem rItem = new ReceiptItem();
+        	rItem.setMedicament(item.getMedicament());
+        	rItem.setAmount(item.getAmount());
+        	rItem.setPrescriptionItem(item);
+        	rItem.setReceipt(receipt);
+        	receipt.getItems().add(rItem);
+        }
+        
         return receipt;
     }
 

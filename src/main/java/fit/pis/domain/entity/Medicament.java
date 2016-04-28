@@ -105,4 +105,8 @@ public class Medicament {
 	public void setCategory(Category category) {
 		this.category = category;
 	}
+	
+	public float getPrice() {
+		return (this.deliveryPrice + this.margin) * this.category.getPaidPrice() / 100;
+	}
 }
