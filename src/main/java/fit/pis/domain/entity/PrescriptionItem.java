@@ -1,5 +1,6 @@
 package fit.pis.domain.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,7 +26,7 @@ public class PrescriptionItem {
 
     private double amount;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescriptionItem")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescriptionItem", cascade = CascadeType.ALL)
     List<ReceiptItem> receiptItems;
 
     public long getId() {
@@ -66,6 +67,18 @@ public class PrescriptionItem {
 
     public void setReceiptItems(List<ReceiptItem> receiptItems) {
         this.receiptItems = receiptItems;
+    }
+
+    public double getIssuedAmount() {
+        double issued = 0;
+        if (receiptItems != null) {
+            for (ReceiptItem receiptItem : receiptItems) {
+                issued += receiptItem.getAmount();
+            }
+        } else {
+            System.err.println("PrescriptionItem: receiptItems is null!");
+        }
+        return issued;
     }
 
 }

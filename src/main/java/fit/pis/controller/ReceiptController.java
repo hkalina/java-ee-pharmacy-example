@@ -64,10 +64,19 @@ public class ReceiptController {
     }
 
     public void saveCurrent() {
-        System.out.println("save receipt....");
-        System.out.println("items: "+current.getItems().size());
-        System.out.println("first item parent: "+current.getItems().get(0).getReceipt().getDate());
+        System.out.println("saveCurrent()");
         dao.save(current);
+    }
+
+    public void saveReceiptOfPrescription() {
+        System.out.println("saveReceiptOfPrescription()");
+        for (ReceiptItem item : current.getItems()) {
+            if(item.getPrescriptionItem().getReceiptItems() == null) {
+                item.getPrescriptionItem().setReceiptItems(new LinkedList<>());
+            }
+            item.getPrescriptionItem().getReceiptItems().add(item);
+        }
+        System.out.println("saved");
     }
 
     public void removeCurrent() {
@@ -82,8 +91,9 @@ public class ReceiptController {
     }
     
     public Receipt getFromPrescription(Prescription prescription) {
+        System.out.println("getFromPrescription()");
         Receipt receipt = new Receipt();
-        receipt.setDate(prescription.getDate());
+        receipt.setDate(new Date());
         receipt.setCustomer(prescription.getCustomer());
         receipt.setItems(new LinkedList<>());
         
@@ -91,12 +101,11 @@ public class ReceiptController {
         	PrescriptionItem item = i.next();
         	ReceiptItem rItem = new ReceiptItem();
         	rItem.setMedicament(item.getMedicament());
-        	rItem.setAmount(item.getAmount());
+        	rItem.setAmount(item.getAmount()-item.getIssuedAmount());
         	rItem.setPrescriptionItem(item);
         	rItem.setReceipt(receipt);
         	receipt.getItems().add(rItem);
         }
-        
         return receipt;
     }
 

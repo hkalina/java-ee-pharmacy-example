@@ -23,11 +23,15 @@
                 </rich:column>
                 <rich:column>
                     <f:facet name="header">Delivery price</f:facet>
-                    <h:outputText value="#{medicament.deliveryPrice}"/>
+                    <h:outputText value="#{medicament.deliveryPrice} Kč"/>
                 </rich:column>
                 <rich:column>
                     <f:facet name="header">Margin</f:facet>
-                    <h:outputText value="#{medicament.margin}"/>
+                    <h:outputText value="#{medicament.margin} Kč"/>
+                </rich:column>
+                <rich:column>
+                    <f:facet name="header">Customer price</f:facet>
+                    <h:outputText value="#{medicament.price} Kč"/>
                 </rich:column>
                 <rich:column>
                     <f:facet name="header">Valid from</f:facet>

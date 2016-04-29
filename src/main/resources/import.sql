@@ -24,10 +24,13 @@ INSERT INTO User (id, username, password, email, firstName, lastName, role) VALU
 INSERT INTO Doctor (id, name, town, street, number, postCode, phone) VALUES (-1, 'Petr Doktor', 'Brno', 'Ulice', '12/345', 60012, '+420 123 456 789');
 INSERT INTO Doctor (id, name, town, street, number, postCode, phone) VALUES (-2, 'Jana Lékařka', 'Břeclav', 'Ulice', '12/345', 60012, '+420 123 456 789');
 
-INSERT INTO Category (id, paidPrice, title, validFrom, validTo) VALUES (-1, 60, 'Category A', NOW(), NULL);
-INSERT INTO Category (id, paidPrice, title, validFrom, validTo) VALUES (-2, 100, 'No charge', NOW(), NULL);
+INSERT INTO Category (id, paidPrice, title, validFrom, validTo) VALUES (-1, 40, 'Hrazeno 40%', NOW(), NULL);
+INSERT INTO Category (id, paidPrice, title, validFrom, validTo) VALUES (-2, 0, 'Bez doplatku', NOW(), NULL);
+INSERT INTO Category (id, paidPrice, title, validFrom, validTo) VALUES (-3, 100, 'Nehrazeno', NOW(), NULL);
 
-INSERT INTO Medicament (id, category_id, deliveryPrice, margin, prescription, title, validFrom, validTo) VALUES (-1, -1, 123.50, 25.60, FALSE, 'Paralen', NOW(), NULL);
+INSERT INTO Medicament (id, category_id, deliveryPrice, margin, prescription, title, validFrom, validTo) VALUES (-1, -3, 35.50, 25.60, FALSE, 'Paralen', NOW(), NULL);
+INSERT INTO Medicament (id, category_id, deliveryPrice, margin, prescription, title, validFrom, validTo) VALUES (-2, -2, 400.20, 25.60, FALSE, 'Inzulin', NOW(), NULL);
+INSERT INTO Medicament (id, category_id, deliveryPrice, margin, prescription, title, validFrom, validTo) VALUES (-3, -1, 152.31, 25.60, FALSE, 'Ataralgin', NOW(), NULL);
 
 INSERT INTO Insurance (id, insuranceNumber, name, citty, street, houseNumber, postcode, phoneNumber) VALUES (-1, 300, 'VZP', 'Praha', 'Jižní', 456, 12345, 789456123);
 

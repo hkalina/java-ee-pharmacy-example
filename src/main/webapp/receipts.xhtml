@@ -21,18 +21,22 @@
                     <h:outputText value="#{receipt.customer.name}"/>
                 </rich:column>
                 <rich:column>
+                    <f:facet name="header">Price</f:facet>
+                    <h:outputText value="#{receipt.price} Kč"/>
+                </rich:column>
+                <rich:column>
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
                         <f:setPropertyActionListener target="#{receipts.current}" value="#{receipt}"/>
                     </a4j:commandLink>
-                    <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems">
+                    <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems, price">
                         <h:graphicImage value="/resources/images/edit.gif" alt="edit"/>
                         <f:setPropertyActionListener target="#{receipts.current}" value="#{receipt}"/>
                     </a4j:commandLink>
                 </rich:column>
             </rich:dataTable>
 
-            <a4j:commandButton value="Create receipt" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems">
+            <a4j:commandButton value="Create receipt" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems, price">
                 <f:setPropertyActionListener target="#{receipts.current}" value="#{receipts.template}"/>
             </a4j:commandButton>
 
@@ -47,7 +51,7 @@
                 <h:panelGrid columns="3" id="editGrid">
 
                     <h:outputLabel value="Date"/>
-                    <rich:calendar id="date" value="#{receipts.current.date}" enableManualInput="true" datePattern="d.M.yyyy h:m"></rich:calendar>
+                    <rich:calendar id="date" value="#{receipts.current.date}" enableManualInput="true" datePattern="d.M.yyyy h:mm"></rich:calendar>
                     <rich:message for="date"/>
 
                     <h:outputLabel value="Customer"/>
@@ -70,11 +74,11 @@
                     </rich:column>
                     <rich:column>
                         <f:facet name="header">Price</f:facet>
-                        <h:outputText value="#{item.medicament.price}Kč"/>
+                        <h:outputText value="#{item.medicament.price} Kč"/>
                     </rich:column>
                     <rich:column>
                         <f:facet name="header">Total price</f:facet>
-                        <h:outputText value="#{item.price}Kč"/>
+                        <h:outputText value="#{item.price} Kč"/>
                     </rich:column>
                     
                     <rich:column>
@@ -91,7 +95,7 @@
                 </rich:dataTable>
 
 				<h:panelGrid columns="3" id="price">
-                	<h:outputLabel value="Total price: #{receipts.current.price}Kč"/>
+                	<h:outputLabel value="Total customer price: #{receipts.current.price} Kč"/>
                 </h:panelGrid>
 
                 <a4j:commandButton value="Add item" onclick="#{rich:component('editItemPopup')}.show();" render="editItemGrid">

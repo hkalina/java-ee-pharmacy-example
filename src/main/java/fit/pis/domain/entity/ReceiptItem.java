@@ -15,7 +15,7 @@ public class ReceiptItem {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private Receipt receipt;
 
     @ManyToOne
@@ -67,6 +67,6 @@ public class ReceiptItem {
     }
 
     public float getPrice() {
-    	return ((float) this.amount * ((this.medicament.getDeliveryPrice() + this.medicament.getMargin()) * this.getMedicament().getCategory().getPaidPrice() / 100));
+    	return (float) (this.amount * this.medicament.getPrice());
     }
 }
