@@ -20,7 +20,7 @@
                     <f:facet name="header">Supplier</f:facet>
                     <h:outputText value="#{order.supplier}"/>
                 </rich:column>
-                <rich:column>
+                <rich:column  rendered="#{request.isUserInRole('MANAGER')})">
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
                         <f:setPropertyActionListener target="#{order.current}" value="#{prescription}"/>
@@ -32,7 +32,7 @@
                 </rich:column>
         	</rich:dataTable>
         	
-        	<a4j:commandButton value="Create order" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems">
+        	<a4j:commandButton value="Create order" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems"  rendered="#{request.isUserInRole('MANAGER')})">
                 <f:setPropertyActionListener target="#{orders.current}" value="#{orders.template}"/>
             </a4j:commandButton>
         

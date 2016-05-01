@@ -30,7 +30,7 @@
                     <f:facet name="header">Phone</f:facet>
                     <h:outputText value="#{insurance.phoneNumber}"/>
                 </rich:column>
-        		<rich:column>
+        		<rich:column rendered="#{request.isUserInRole('MANAGER')}">
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
                         <f:setPropertyActionListener target="#{insurances.current}" value="#{insurance}"/>
@@ -42,7 +42,7 @@
                 </rich:column>
         	</rich:dataTable>
         	
-        	<a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid">
+        	<a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid"  rendered="#{request.isUserInRole('MANAGER')}">
                 <h:outputText value="Create insurance"/>
                 <f:setPropertyActionListener target="#{insurances.current}" value="#{insurance.template}"/>
             </a4j:commandLink>

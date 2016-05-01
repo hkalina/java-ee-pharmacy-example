@@ -17,12 +17,12 @@ public class MedicamentDao {
     @PersistenceContext
     private EntityManager em;
 
-    @RolesAllowed({"ADMIN", "MANAGER"})
+    @RolesAllowed({"MANAGER"})
     public void save(Medicament medicament) {
         em.merge(medicament);
     }
 
-    @RolesAllowed({"ADMIN", "MANAGER"})
+    @RolesAllowed({"MANAGER"})
     public void remove(Medicament medicament) {
         em.remove(em.merge(medicament));
     }

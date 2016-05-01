@@ -45,7 +45,7 @@
                     	<f:convertDateTime pattern="d.M.yyyy" />
                     </h:outputText>
                 </rich:column>
-                <rich:column rendered="#{request.isUserInRole('ADMIN') || request.isUserInRole('MANAGER')}">
+                <rich:column rendered="#{request.isUserInRole('MANAGER')})">
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
                         <f:setPropertyActionListener target="#{medicaments.current}" value="#{medicament}"/>
@@ -57,7 +57,7 @@
                 </rich:column>
             </rich:dataTable>
             
-            <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid" rendered="#{request.isUserInRole('ADMIN') || request.isUserInRole('MANAGER')}">
+            <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid" rendered="#{request.isUserInRole('ADMIN')}">
                 <h:outputText value="Create medicament"/>
                 <f:setPropertyActionListener target="#{medicaments.current}" value="#{medicament.template}"/>
             </a4j:commandLink>

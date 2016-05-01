@@ -46,11 +46,15 @@
                     <li><a href="#{request.contextPath}/">Start page</a></li>
                     <li><a href="#{request.contextPath}/faces/prescriptions.xhtml">Prescriptions</a></li>
                     <li><a href="#{request.contextPath}/faces/receipts.xhtml">Receipts</a></li>
-                    <li><a href="#{request.contextPath}/faces/doctors.xhtml">Doctors</a></li>
+                    <h:panelGroup rendered="#{request.isUserInRole('ADMIN')}">
+                    	<li><a href="#{request.contextPath}/faces/doctors.xhtml">Doctors</a></li>
+                    </h:panelGroup>
                     <li><a href="#{request.contextPath}/faces/medicaments.xhtml">Medicaments</a></li>
                     <li><a href="#{request.contextPath}/faces/categories.xhtml">Categories</a></li>
                     <li><a href="#{request.contextPath}/faces/orders.xhtml">Orders</a></li>
-                    <li><a href="#{request.contextPath}/faces/suppliers.xhtml">Suppliers</a></li>
+                    <h:panelGroup rendered="#{request.isUserInRole('MANAGER')}">
+                    	<li><a href="#{request.contextPath}/faces/suppliers.xhtml">Suppliers</a></li>
+                    </h:panelGroup>
                     <h:panelGroup rendered="#{request.isUserInRole('ADMIN')}">
                         <li><a href="#{request.contextPath}/faces/users.xhtml">Users</a></li>
                     </h:panelGroup>
