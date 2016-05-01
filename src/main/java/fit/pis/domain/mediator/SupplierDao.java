@@ -28,7 +28,7 @@ public class SupplierDao {
     	em.remove(em.merge(supplier));
     }
     
-    @RolesAllowed({"MANAGER"})
+    @PermitAll
     public List<Supplier> findAll() {
     	TypedQuery<Supplier> query = em.createQuery("SELECT s FROM Supplier s", Supplier.class);
     	return query.getResultList();

@@ -34,7 +34,7 @@
                     	<f:convertDateTime pattern="d.M.yyyy" />
                     </h:outputText>
                 </rich:column>
-                <rich:column rendered="#{request.isUserInRole('ADMIN')">
+                <rich:column rendered="#{request.isUserInRole('ADMIN')}">
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
                         <f:setPropertyActionListener target="#{categores.current}" value="#{category}"/>
@@ -46,7 +46,7 @@
                 </rich:column>
         	</rich:dataTable>
         	
-        	<a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid" rendered="#{request.isUserInRole('ADMIN')">
+        	<a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid" rendered="#{request.isUserInRole('ADMIN')}">
                 <h:outputText value="Create category"/>
                 <f:setPropertyActionListener target="#{categories.current}" value="#{category.template}"/>
             </a4j:commandLink>
