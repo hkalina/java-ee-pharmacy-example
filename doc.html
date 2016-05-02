@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Projekt PIS</title>
+    <style type="text/css">
+    	table { border-collapse: collapse; }
+    	td, th { border: 1px solid black; padding: 0.3em 0.5em; text-align: left; }
+    	dt { font-weight: bold; margin-top: 0.5em; }
+    </style>
+</head>
+<body>
+
+<h1>Lékárna</h1>
+
+<!-- Jména autorů a jejich činnost -->
+<dl>
+	<dt>Autoři</dt>
+	<dd>Jan Kalina 
+	    <a href="mailto:xkalin03@stud.fit.vutbr.cz">xkalin03@stud.fit.vutbr.cz</a> -
+		správa uživatelů, přihlašování, základ vrstvy domény, řadičů a pohledů pro první entity, integrace Hibernate a Richfaces
+	</dd>
+	<dd>Pavel Dvořák
+	    <a href="mailto:xdvora0x@stud.fit.vutbr.cz">xdvora0x@stud.fit.vutbr.cz</a> -
+		zbytek vrstvy domény, řadičů a pohledů (EJB, řadiče a pohledy ostatních entit), zejména správa receptů (prescription) a účtenek (receipt)
+	</dd>
+	<dd>Jan Koriťák
+	    <a href="mailto:xkorit01@stud.fit.vutbr.cz">xkorit01@stud.fit.vutbr.cz</a> - 
+		oprávnění na úrovni EJB i pohledů, úvodní strana
+	</dd>
+</dl>
+
+<h2>Uživatelé systému pro testování</h2>
+<table>
+<tbody><tr><th>Login</th><th>Heslo</th><th>Role</th></tr>
+<tr><td>admin</td><td>admin</td><td>Technický správce</td></tr>
+<tr><td>manager</td><td>manager</td><td>Vedoucí prodejny</td></tr>
+<tr><td>pharmacist</td><td>pharmacist</td><td>Lékárník</td></tr>
+</tbody></table>
+
+<!-- vyžadované knihovny i s verzemi, pouze pro Java EE -->
+<h2>Vyžadované knihovny</h2>
+
+<p>Všechny vyžadované knihovny jsou k dispozici z Maven repozitářů. Definovány jsou v souboru <code>pom.xml</code>. Postup předpokládá  aplikační server WildFly 10.</o>
+
+<p>Před instalací aplikace na server musí být na serveru definována bezpečnostní doména (security domain). Pro její automatické vytvoření na běžícím WildFly spusťte:
+
+<pre>mvn wildfly:execute-commands</pre>
+
+Pro instalaci samotné aplikace na běžící WildFly pak stačí spustit:
+<pre>mvn clean wildfly:deploy</pre>
+
+Aplikace využívá datový zdroj (datasource) <code>ExampleDS</code>, který je na serveru WildFly přítomen implicitně. Pro instalaci na jiný aplikační server by bylo nezbytné jej definovat.
+
+<p>Aplikace je následně dostupná na adrese <a href="http://localhost:8080/pis/">http://localhost:8080/pis/</a></p>
+
+</body></html>
