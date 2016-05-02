@@ -57,8 +57,10 @@
         	<rich:popupPanel header="Edit insurance" id="editPopup" domElementAttachment="parent">
                 <h:panelGrid columns="3" id="editGrid">
 					
-                    <h:outputLabel value="Insurance number"/>
-                    <h:inputText value="#{insurances.current.insuranceNumber}" id="insuranceNumber" />
+                    <h:outputLabel value="Insurance number" styleClass="required"/>
+                    <h:inputText value="#{insurances.current.insuranceNumber}" id="insuranceNumber" required="true" requiredMessage="Insurance number is required" validatorMessage="Insurance number must be an integer.">
+                    	<f:validateLongRange minimum="0"/>
+                    </h:inputText>
                     <rich:message for="insuranceNumber"/>
                     
                     <h:outputLabel value="Name"/>

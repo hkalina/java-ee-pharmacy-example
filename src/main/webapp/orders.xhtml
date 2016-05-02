@@ -46,8 +46,9 @@
         	<rich:popupPanel header="Edit prescription" id="editPopup" domElementAttachment="parent" autosized="true">
                 <h:panelGrid columns="3" id="editGrid">
                 
-                	<h:outputLabel value="Date"/>
-                    <rich:calendar id="date" value="#{orders.current.date}" enableManualInput="true" datePattern="d.M.yyyy"></rich:calendar>
+                	<h:outputLabel value="Date" styleClass="required"/>
+                    <rich:calendar required="true" id="date" value="#{orders.current.date}" enableManualInput="true" datePattern="d.M.yyyy" requiredMessage="Date is required.">
+                    </rich:calendar>
                     <rich:message for="date"/>
                 
                 	<h:outputLabel value="Supplier"/>

@@ -50,8 +50,9 @@
             <rich:popupPanel header="Edit receipt" id="editPopup" domElementAttachment="parent" autosized="true">
                 <h:panelGrid columns="3" id="editGrid">
 
-                    <h:outputLabel value="Date"/>
-                    <rich:calendar id="date" value="#{receipts.current.date}" enableManualInput="true" datePattern="d.M.yyyy h:mm"></rich:calendar>
+                    <h:outputLabel value="Date" styleClass="required"/>
+                    <rich:calendar required="true" id="date" value="#{receipts.current.date}" enableManualInput="true" datePattern="d.M.yyyy h:mm" requiredMessage="Date is required.">
+                    </rich:calendar>
                     <rich:message for="date"/>
 
                     <h:outputLabel value="Customer"/>

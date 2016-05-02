@@ -72,8 +72,10 @@
             <rich:popupPanel header="Edit medicament" id="editPopup" domElementAttachment="parent">
                 <h:panelGrid columns="3" id="editGrid">
 
-                    <h:outputLabel value="Title"/>
-                    <h:inputText value="#{medicaments.current.title}" id="title" />
+                    <h:outputLabel value="Title" styleClass="required"/>
+                    <h:inputText value="#{medicaments.current.title}" id="title" required="true" requiredMessage="Title is required" validatorMessage="Minimum length of title is 2">
+                    	<f:validateLength minimum="2"/>
+                    </h:inputText>
                     <rich:message for="title"/>
                     
                     <h:outputLabel value="Category"/>

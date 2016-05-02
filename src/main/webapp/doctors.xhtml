@@ -54,7 +54,9 @@
                 <h:panelGrid columns="3" id="editGrid">
 
                     <h:outputLabel value="Name" styleClass="required"/>
-                    <h:inputText value="#{doctors.current.name}" id="name" />
+                    <h:inputText value="#{doctors.current.name}" id="name" required="true" required="true" requiredMessage="Name is required" validatorMessage="Minimum length of name is 2">
+                    	<f:validateLength minimum="2"/>
+                    </h:inputText>
                     <rich:message for="name"/>
 
                     <h:outputLabel value="Town"/>
