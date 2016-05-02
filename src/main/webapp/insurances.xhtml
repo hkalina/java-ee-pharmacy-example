@@ -7,11 +7,10 @@
                 xmlns:rich="http://richfaces.org/rich"
                 template="templates/template.xhtml">
     <ui:define name="content">
-        <h:form id="form">
-        
+        <h:form>
         	<rich:dataTable value="#{insurances.all}" var="insurance" id="table">
         		<rich:column>
-                    <f:facet name="header">Insurance number</f:facet>
+                    <f:facet name="header">Insurance company number</f:facet>
                     <h:outputText value="#{insurance.insuranceNumber}"/>
                 </rich:column>
                 <rich:column>
@@ -46,18 +45,22 @@
                 <h:outputText value="Create insurance"/>
                 <f:setPropertyActionListener target="#{insurances.current}" value="#{insurance.template}"/>
             </a4j:commandLink>
+        </h:form>
 
-            <rich:popupPanel header="Remove insurance" id="removePopup" autosized="true">
+        <rich:popupPanel header="Remove insurance" id="removePopup" autosized="true">
+            <h:form>
                 Are you sure you want to remove the insurance?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
                 <a4j:commandButton value="Remove" action="#{insurances.removeCurrent}"
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
-            </rich:popupPanel>
+            </h:form>
+        </rich:popupPanel>
         
-        	<rich:popupPanel header="Edit insurance" id="editPopup" domElementAttachment="parent">
+        <rich:popupPanel header="Edit insurance company" id="editPopup" domElementAttachment="parent">
+            <h:form>
                 <h:panelGrid columns="3" id="editGrid">
 					
-                    <h:outputLabel value="Insurance number" styleClass="required"/>
+                    <h:outputLabel value="Insurance company number" styleClass="required"/>
                     <h:inputText value="#{insurances.current.insuranceNumber}" id="insuranceNumber" required="true" requiredMessage="Insurance number is required" validatorMessage="Insurance number must be an integer.">
                     	<f:validateLongRange minimum="0"/>
                     </h:inputText>
@@ -91,8 +94,7 @@
                 <a4j:commandButton value="Save" action="#{insurances.saveCurrent}" render="table"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
-            </rich:popupPanel>
-            
-        </h:form>
+            </h:form>
+        </rich:popupPanel>
     </ui:define>
 </ui:composition>

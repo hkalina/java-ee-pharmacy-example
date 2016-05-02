@@ -7,8 +7,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 template="templates/template.xhtml">
     <ui:define name="content">
-        <h:form id="form">
-
+        <h:form>
             <rich:dataTable value="#{doctors.all}" var="doctor" id="table">
                 <rich:column>
                     <f:facet name="header">Name</f:facet>
@@ -42,15 +41,19 @@
                 <h:outputText value="Create doctor"/>
                 <f:setPropertyActionListener target="#{doctors.current}" value="#{doctor.template}"/>
             </a4j:commandLink>
+        </h:form>
 
-            <rich:popupPanel header="Remove doctor" id="removePopup" autosized="true">
+        <rich:popupPanel header="Remove doctor" id="removePopup" autosized="true">
+            <h:form>
                 Are you sure you want to remove the doctor?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
                 <a4j:commandButton value="Remove" action="#{doctors.removeCurrent}"
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
-            </rich:popupPanel>
+            </h:form>
+        </rich:popupPanel>
 
-            <rich:popupPanel header="Edit doctor" id="editPopup" domElementAttachment="parent">
+        <rich:popupPanel header="Edit doctor" id="editPopup" domElementAttachment="parent">
+            <h:form>
                 <h:panelGrid columns="3" id="editGrid">
 
                     <h:outputLabel value="Name" styleClass="required"/>
@@ -83,8 +86,7 @@
                 <a4j:commandButton value="Save" action="#{doctors.saveCurrent}" render="table"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
-            </rich:popupPanel>
-
-        </h:form>
+            </h:form>
+        </rich:popupPanel>
     </ui:define>
 </ui:composition>

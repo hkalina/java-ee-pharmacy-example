@@ -7,13 +7,12 @@
                 xmlns:rich="http://richfaces.org/rich"
                 template="templates/template.xhtml">
     <ui:define name="content">
-        <h:form id="form">
-
+        <h:form>
             <rich:dataTable value="#{receipts.all}" var="receipt" id="table">
                 <rich:column>
                     <f:facet name="header">Date</f:facet>
                     <h:outputText value="#{receipt.date}">
-                        <f:convertDateTime pattern="d.M.yyyy h:m" />
+                        <f:convertDateTime pattern="d.M.yyyy H:mm" />
                     </h:outputText>
                 </rich:column>
                 <rich:column>
@@ -39,19 +38,23 @@
             <a4j:commandButton value="Create receipt" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems, price" rendered="#{request.isUserInRole('PHARMACIST') || request.isUserInRole('MANAGER')}">
                 <f:setPropertyActionListener target="#{receipts.current}" value="#{receipts.template}"/>
             </a4j:commandButton>
+        </h:form>
 
-            <rich:popupPanel header="Remove receipt" id="removePopup" autosized="true">
+        <rich:popupPanel header="Remove receipt" id="removePopup" autosized="true">
+            <h:form>
                 Are you sure you want to remove the receipt?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
                 <a4j:commandButton value="Remove" action="#{receipts.removeCurrent}"
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
-            </rich:popupPanel>
+            </h:form>
+        </rich:popupPanel>
 
-            <rich:popupPanel header="Edit receipt" id="editPopup" domElementAttachment="parent" autosized="true">
+        <rich:popupPanel header="Edit receipt" id="editPopup" domElementAttachment="parent" autosized="true">
+            <h:form>
                 <h:panelGrid columns="3" id="editGrid">
 
                     <h:outputLabel value="Date" styleClass="required"/>
-                    <rich:calendar required="true" id="date" value="#{receipts.current.date}" enableManualInput="true" datePattern="d.M.yyyy h:mm" requiredMessage="Date is required.">
+                    <rich:calendar required="true" id="date" value="#{receipts.current.date}" enableManualInput="true" datePattern="d.M.yyyy H:mm" requiredMessage="Date is required.">
                     </rich:calendar>
                     <rich:message for="date"/>
 
@@ -106,16 +109,20 @@
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
                 <a4j:commandButton value="Save" action="#{receipts.saveCurrent}" render="table"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
-            </rich:popupPanel>
+            </h:form>
+        </rich:popupPanel>
 
-            <rich:popupPanel header="Remove receipt item" id="removeItemPopup" autosized="true">
+        <rich:popupPanel header="Remove receipt item" id="removeItemPopup" autosized="true">
+            <h:form>
                 Are you sure you want to remove the item?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removeItemPopup')}.hide();"/>
                 <a4j:commandButton value="Remove" action="#{receipts.removeCurrentItem}"
                                    oncomplete="#{rich:component('removeItemPopup')}.hide();" render="editGrid, tableitems, price"/>
-            </rich:popupPanel>
+            </h:form>
+        </rich:popupPanel>
 
-            <rich:popupPanel header="Edit receipt item" id="editItemPopup" domElementAttachment="parent" autosized="true">
+        <rich:popupPanel header="Edit receipt item" id="editItemPopup" domElementAttachment="parent" autosized="true">
+            <h:form>
                 <h:panelGrid columns="3" id="editItemGrid">
 
                     <h:outputLabel value="Medicament"/>
@@ -134,8 +141,7 @@
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editItemPopup')}.hide();"/>
                 <a4j:commandButton value="Save" action="#{receipts.saveCurrentItem}" render="editGrid, tableitems, price"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editItemPopup')}.hide();}"/>
-            </rich:popupPanel>
-
-        </h:form>
+            </h:form>
+        </rich:popupPanel>
     </ui:define>
 </ui:composition>

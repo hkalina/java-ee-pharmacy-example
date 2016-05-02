@@ -7,7 +7,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 template="templates/template.xhtml">
     <ui:define name="content">
-        <h:form id="form">
+        <h:form>
         	<rich:dataTable value="#{medicaments.all}" var="medicament" id="table">
                 <rich:column>
                     <f:facet name="header">Title</f:facet>
@@ -61,15 +61,19 @@
                 <h:outputText value="Create medicament"/>
                 <f:setPropertyActionListener target="#{medicaments.current}" value="#{medicament.template}"/>
             </a4j:commandLink>
+        </h:form>
             
-            <rich:popupPanel header="Remove medicament" id="removePopup" autosized="true">
+        <rich:popupPanel header="Remove medicament" id="removePopup" autosized="true">
+            <h:form>
                 Are you sure you want to remove the medicament?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
                 <a4j:commandButton value="Remove" action="#{medicaments.removeCurrent}"
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
-            </rich:popupPanel>
+            </h:form>
+        </rich:popupPanel>
             
-            <rich:popupPanel header="Edit medicament" id="editPopup" domElementAttachment="parent">
+        <rich:popupPanel header="Edit medicament" id="editPopup" domElementAttachment="parent">
+            <h:form>
                 <h:panelGrid columns="3" id="editGrid">
 
                     <h:outputLabel value="Title" styleClass="required"/>
@@ -101,7 +105,7 @@
                 <a4j:commandButton value="Save" action="#{medicaments.saveCurrent}" render="table"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
-            </rich:popupPanel>
-        </h:form>
+            </h:form>
+        </rich:popupPanel>
     </ui:define>
 </ui:composition>

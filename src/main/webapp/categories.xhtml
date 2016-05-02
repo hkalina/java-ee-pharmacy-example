@@ -7,8 +7,7 @@
                 xmlns:rich="http://richfaces.org/rich"
                 template="templates/template.xhtml">
     <ui:define name="content">
-        <h:form id="form">
-        	
+        <h:form>
         	<rich:dataTable value="#{categories.all}" var="category" id="table">
         		<rich:column>
                     <f:facet name="header">Title</f:facet>
@@ -50,25 +49,27 @@
                 <h:outputText value="Create category"/>
                 <f:setPropertyActionListener target="#{categories.current}" value="#{category.template}"/>
             </a4j:commandLink>
+        </h:form>
 
-            <rich:popupPanel header="Remove category" id="removePopup" autosized="true">
+        <rich:popupPanel header="Remove category" id="removePopup" autosized="true">
+            <h:form>
                 Are you sure you want to remove the category?
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('removePopup')}.hide();"/>
                 <a4j:commandButton value="Remove" action="#{categories.removeCurrent}"
                                    oncomplete="#{rich:component('removePopup')}.hide();" render="table"/>
-            </rich:popupPanel>
+            </h:form>
+        </rich:popupPanel>
         	
-        	<rich:popupPanel header="Edit category" id="editPopup" domElementAttachment="parent">
+        <rich:popupPanel header="Edit category" id="editPopup" domElementAttachment="parent">
+            <h:form>
                 <h:panelGrid columns="3" id="editGrid">
                 	
                 	<h:outputLabel value="Title" styleClass="required"/>
-                    <h:inputText value="#{categories.current.title}" id="title" required="true" requiredMessage="Title is required" validatorMessage="Minimum length of title is 2">
-                        <f:validateLength minimum="2"/>
-                    </h:inputText>
+                    <h:inputText value="#{categories.current.title}" id="title" required="true" requiredMessage="Title is required" />
                     <rich:message for="title"/>
                     
                     <h:outputLabel value="Paid price"/>
-                    <rich:inputNumberSpinner value="#{categories.current.paidPrice}" minValue="1"  maxValue="100" id="paidPrice" />%
+                    <rich:inputNumberSpinner value="#{categories.current.paidPrice}" minValue="0"  maxValue="100" id="paidPrice" />
                     <rich:message for="paidPrice"/>
                     
                     <h:outputLabel value="Insurance"/>
@@ -82,8 +83,7 @@
                 <a4j:commandButton value="Save" action="#{categories.saveCurrent}" render="table"
                                    oncomplete="if (#{facesContext.maximumSeverity==null}){#{rich:component('editPopup')}.hide();}"/>
                 <a4j:commandButton value="Cancel" onclick="#{rich:component('editPopup')}.hide();"/>
-            </rich:popupPanel>
-        	
-        </h:form>
+            </h:form>
+        </rich:popupPanel>
     </ui:define>
 </ui:composition>
