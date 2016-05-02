@@ -51,11 +51,11 @@ public class OOrder {
     this.oorderItems = oorderItems;
   }
 
-public Date getDate() {
+  public Date getDate() {
 	return date;
 }
 
-public void setDate(Date date) {
+  public void setDate(Date date) {
 	this.date = date;
 }
 }

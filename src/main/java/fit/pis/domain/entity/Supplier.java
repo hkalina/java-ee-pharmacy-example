@@ -99,4 +99,14 @@ public class Supplier {
   public void setPhoneNumber(int phoneNumber) {
     this.phoneNumber = phoneNumber;
   }
+
+  public String toString() {
+    return name;
+  }
+
+  public boolean equals(Object object) {
+    if (object == null) return false;
+    if ( ! (object instanceof Supplier)) return false;
+    return this.id == ((Supplier) object).id;
+  }
 }

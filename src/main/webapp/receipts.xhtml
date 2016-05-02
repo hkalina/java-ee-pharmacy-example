@@ -60,6 +60,7 @@
 
                     <h:outputLabel value="Customer"/>
                     <h:selectOneMenu value="#{receipts.current.customer}" id="customer">
+                        <f:selectItem itemValue="null" itemLabel="None" />
                         <f:selectItems value="#{customers.all}" var="c" itemValue="#{c}" itemLabel="#{c.name}" />
                         <f:converter binding="#{customers}" />
                     </h:selectOneMenu>

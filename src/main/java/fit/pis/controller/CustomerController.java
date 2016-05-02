@@ -49,12 +49,12 @@ public class CustomerController implements Converter {
 
     @Override
     public Object getAsObject(FacesContext facesContext, UIComponent uiComponent, String value) {
-        if (value == null) return null;
+        if (value == null || value.equals("null")) return null;
         return dao.getById(Long.valueOf(value));
     }
 
     @Override
     public String getAsString(FacesContext facesContext, UIComponent uiComponent, Object object) {
-        return Long.toString(((Customer) object).getId());
+        return (object instanceof Customer) ? Long.toString(((Customer) object).getId()) : "null";
     }
 }
