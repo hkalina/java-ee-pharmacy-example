@@ -37,21 +37,6 @@
 <tr><td>pharmacist</td><td>pharmacist</td><td>Lékárník</td></tr>
 </tbody></table>
 
-<h2>Zprovoznění</h2>
-
-<p>Vyžadované knihovny jsou k dispozici z Maven repozitářů, dle souboru <code>pom.xml</code>. Předpokládá aplikační server WildFly 10.</o>
-
-<p>Před instalací aplikace na server musí být na serveru definována doména bezpečnosti (security domain). Pro její automatické vytvoření na aktuálně běžícím WildFly spusťte: (nebo ručně importuje skript <code>install.cli</code>)
-
-<pre>mvn wildfly:execute-commands</pre>
-
-Pro instalaci samotné aplikace na běžící WildFly pak stačí spustit:
-<pre>mvn clean wildfly:deploy</pre>
-
-Aplikace využívá datový zdroj (datasource) <code>ExampleDS</code>, který je na serveru WildFly přítomen implicitně. Pro instalaci na jiný aplikační server by bylo nezbytné jej definovat.
-
-<p>Aplikace je následně dostupná na adrese <a href="http://localhost:8080/pis/">http://localhost:8080/pis/</a></p>
-
 <h2>Vyžadované knihovny</h2>
 <ul>
 <li>jboss-annotations-api_1.2_spec (poskytováno WildFly)</li>
@@ -60,5 +45,16 @@ Aplikace využívá datový zdroj (datasource) <code>ExampleDS</code>, který je
 <li>hibernate-core (poskytováno WildFly)</li>
 <li>richfaces 4.5.9.Final</li>
 </ul>
+
+<h2>Zprovoznění</h2>
+
+<p>Předpokládá aplikační server WildFly 10. Nejprve je nutné zajistit aby byl v rámci AS vytvořený zdroj dat <code>ExampleDS</code> a doména bezpečnosti <code>pis-domain</code>. Testovací zdroj dat je v rámci WildFly přítomen implicitně. Pro vytvoření domény bezpečnosti je nutné importovat CLI skript WildFly <code>install.cli</code>, nebo jej spustit příkazem:</p>
+
+<pre>mvn wildfly:execute-commands</pre>
+
+<p>Pro instalaci samotné aplikace na běžící WildFly pak stačí spustit:</p>
+<pre>mvn clean wildfly:deploy</pre>
+
+<p>Aplikace je následně dostupná na adrese <a href="http://localhost:8080/pis/">http://localhost:8080/pis/</a></p>
 
 </body></html>
