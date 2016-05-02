@@ -24,7 +24,7 @@
                     <f:facet name="header">Price</f:facet>
                     <h:outputText value="#{receipt.price} Kč"/>
                 </rich:column>
-                <rich:column rendered="#{request.isUserInRole('PHARMACIST')} || {request.isUserInRole('MANAGER')}">
+                <rich:column rendered="#{request.isUserInRole('PHARMACIST') || request.isUserInRole('MANAGER')}">
                     <a4j:commandLink onclick="#{rich:component('removePopup')}.show();">
                         <h:graphicImage value="/resources/images/delete.gif" alt="delete"/>
                         <f:setPropertyActionListener target="#{receipts.current}" value="#{receipt}"/>
@@ -36,7 +36,7 @@
                 </rich:column>
             </rich:dataTable>
 
-            <a4j:commandButton value="Create receipt" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems, price" rendered="#{request.isUserInRole('PHARMACIST')} || {request.isUserInRole('MANAGER')}">
+            <a4j:commandButton value="Create receipt" onclick="#{rich:component('editPopup')}.show();" render="editGrid, tableitems, price" rendered="#{request.isUserInRole('PHARMACIST') || request.isUserInRole('MANAGER')}">
                 <f:setPropertyActionListener target="#{receipts.current}" value="#{receipts.template}"/>
             </a4j:commandButton>
 
