@@ -7,6 +7,9 @@
                 xmlns:rich="http://richfaces.org/rich"
                 template="templates/template.xhtml">
     <ui:define name="content">
-        (start page)
+        <h:form>
+        	<h:commandButton value="Prescriptions" action="prescriptions"/>
+        	<h:commandButton value="Receipts" action="receipts"/>
+        </h:form>
     </ui:define>
 </ui:composition>
