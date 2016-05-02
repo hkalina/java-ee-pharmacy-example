@@ -57,7 +57,7 @@
                 </rich:column>
             </rich:dataTable>
             
-            <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid" rendered="#{request.isUserInRole('ADMIN')}">
+            <a4j:commandLink onclick="#{rich:component('editPopup')}.show();" render="editGrid" rendered="#{request.isUserInRole('MANAGER')}">
                 <h:outputText value="Create medicament"/>
                 <f:setPropertyActionListener target="#{medicaments.current}" value="#{medicament.template}"/>
             </a4j:commandLink>
