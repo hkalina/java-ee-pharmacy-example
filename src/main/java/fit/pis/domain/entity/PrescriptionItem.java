@@ -24,9 +24,9 @@ public class PrescriptionItem {
     @ManyToOne
     private Medicament medicament;
 
-    private double amount;
+    private int amount;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescriptionItem", cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescriptionItem", cascade = CascadeType.MERGE)
     List<ReceiptItem> receiptItems;
 
     public long getId() {
@@ -53,11 +53,11 @@ public class PrescriptionItem {
         this.medicament = medicament;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 
@@ -69,8 +69,8 @@ public class PrescriptionItem {
         this.receiptItems = receiptItems;
     }
 
-    public double getIssuedAmount() {
-        double issued = 0;
+    public int getIssuedAmount() {
+        int issued = 0;
         if (receiptItems != null) {
             for (ReceiptItem receiptItem : receiptItems) {
                 issued += receiptItem.getAmount();

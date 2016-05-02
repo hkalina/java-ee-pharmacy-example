@@ -21,7 +21,7 @@ public class ReceiptItem {
     @ManyToOne
     private Medicament medicament;
 
-    private double amount;
+    private int amount;
 
     @ManyToOne
     private PrescriptionItem prescriptionItem;
@@ -50,11 +50,11 @@ public class ReceiptItem {
         this.medicament = medicament;
     }
 
-    public double getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(int amount) {
         this.amount = amount;
     }
 

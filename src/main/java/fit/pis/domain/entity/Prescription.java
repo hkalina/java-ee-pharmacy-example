@@ -70,16 +70,16 @@ public class Prescription {
         this.items = items;
     }
 
-    public double getIssuedAmount() {
-        double issued = 0;
+    public int getIssuedAmount() {
+        int issued = 0;
         for (PrescriptionItem item : items) {
             issued += item.getIssuedAmount();
         }
         return issued;
     }
 
-    public double getAmount() {
-        double amount = 0;
+    public int getAmount() {
+        int amount = 0;
         for (PrescriptionItem item : items) {
             amount += item.getAmount();
         }
